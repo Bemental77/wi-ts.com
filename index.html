@@ -4,8 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wisconsin Tech Solutions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            color: #333;
+            background-color: #fff;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        h1 {
+            color: #007acc;
+        }
+        ul {
+            margin-top: 20px;
+        }
+        .dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        .dark-mode h1 {
+            color: #80d4ff;
+        }
+    </style>
 </head>
 <body>
-    <h1>Wisconsin Tech Solutions is under construction</h1>
+    <button onclick="toggleDarkMode()" id="darkModeButton">Enable Dark Mode</button>
+    <h1>Wisconsin Tech Solutions</h1>
+    <p>Our website is currently under construction, but here’s what we offer:</p>
+    <ul>
+        <li><strong>EDI Solutions</strong>: Automating document exchanges like purchase orders and invoices for seamless communication with trading partners.</li>
+        <li><strong>API Integrations</strong>: Connecting businesses to platforms like Amazon, Target, and ChannelAdvisor for real-time data sharing.</li>
+        <li><strong>Web Portals</strong>: Providing accessible solutions for manual data entry and order tracking.</li>
+        <li><strong>Data Mapping and Transformation</strong>: Ensuring compatibility between different systems and formats.</li>
+        <li><strong>Inventory Management</strong>: Synchronizing stock levels across sales channels to prevent overselling.</li>
+        <li><strong>Order Fulfillment Support</strong>: Streamlining order processing and shipment coordination with major retailers.</li>
+        <li><strong>Analytics and Reporting</strong>: Delivering insights to improve supply chain performance and sales strategies.</li>
+        <li><strong>Workflow Automation</strong>: Reducing manual tasks to enhance efficiency and accuracy in operations.</li>
+    </ul>
+    <p>Wisconsin Tech Solutions leverages Microsoft Azure for secure, scalable, and cost-effective integration and data management services.</p>
+
+    <script>
+        function toggleDarkMode() {
+            const body = document.body
+            const button = document.getElementById('darkModeButton')
+            body.classList.toggle('dark-mode')
+            button.textContent = body.classList.contains('dark-mode') ? 'Disable Dark Mode' : 'Enable Dark Mode'
+        }
+    </script>
 </body>
 </html>

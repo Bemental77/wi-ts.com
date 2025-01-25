@@ -1,56 +1,106 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wisconsin Tech Solutions</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            color: #333;
-            background-color: #fff;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        h1 {
-            color: #007acc;
-        }
-        ul {
-            margin-top: 20px;
-        }
-        .dark-mode {
-            background-color: #121212;
-            color: #e0e0e0;
-        }
-        .dark-mode h1 {
-            color: #80d4ff;
-        }
-    </style>
-</head>
-<body>
-    <button onclick="toggleDarkMode()" id="darkModeButton">Enable Dark Mode</button>
-    <h1>Wisconsin Tech Solutions</h1>
-    <p>Our website is currently under construction, but here’s what we offer:</p>
-    <ul>
-        <li><strong>EDI Solutions</strong>: Automating document exchanges like purchase orders and invoices for seamless communication with trading partners.</li>
-        <li><strong>API Integrations</strong>: Connecting businesses to platforms like Amazon, Target, and ChannelAdvisor for real-time data sharing.</li>
-        <li><strong>Web Portals</strong>: Providing accessible solutions for manual data entry and order tracking.</li>
-        <li><strong>Data Mapping and Transformation</strong>: Ensuring compatibility between different systems and formats.</li>
-        <li><strong>Inventory Management</strong>: Synchronizing stock levels across sales channels to prevent overselling.</li>
-        <li><strong>Order Fulfillment Support</strong>: Streamlining order processing and shipment coordination with major retailers.</li>
-        <li><strong>Analytics and Reporting</strong>: Delivering insights to improve supply chain performance and sales strategies.</li>
-        <li><strong>Workflow Automation</strong>: Reducing manual tasks to enhance efficiency and accuracy in operations.</li>
-    </ul>
-    <p>Wisconsin Tech Solutions leverages Microsoft Azure for secure, scalable, and cost-effective integration and data management services.</p>
+<!DOCTYPE HTML>
 
-    <script>
-        function toggleDarkMode() {
-            const body = document.body
-            const button = document.getElementById('darkModeButton')
-            body.classList.toggle('dark-mode')
-            button.textContent = body.classList.contains('dark-mode') ? 'Disable Dark Mode' : 'Enable Dark Mode'
-        }
-    </script>
-</body>
+<html>
+	<head>
+		<title>Wisconsin Tech Solutions</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<h1><a href="index.html">Wisconsin Tech Solutions</a></h1>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2>Menu</h2>
+							<ul class="links">
+								<li><a href="index.html">Home</a></li>
+								<li><a href="services.html">Services</a></li>
+								<li><a href="about.html">About Us</a></li>
+								<li><a href="contact.html">Contact</a></li>
+								<li><a href="login.html">Log In</a></li>
+							</ul>
+							<a href="#" class="close">Close</a>
+						</div>
+					</nav>
+
+				<!-- Banner -->
+					<section id="banner">
+						<div class="inner">
+							<div class="logo"><span class="icon fa-wrench"></span></div>
+							<h2>Welcome to Wisconsin Tech Solutions</h2>
+							<p>Your partner in innovative IT solutions</p>
+						</div>
+					</section>
+
+				<!-- Wrapper -->
+					<section id="wrapper">
+
+						<!-- Services -->
+							<section id="one" class="wrapper spotlight style1">
+								<div class="inner">
+									<a href="services.html" class="image"><img src="images/service.jpg" alt="Our Services" /></a>
+									<div class="content">
+										<h2 class="major">Our Services</h2>
+										<p>Explore our range of IT services tailored to meet your business needs, including consulting, infrastructure, and managed solutions.</p>
+										<a href="services.html" class="special">Learn more</a>
+									</div>
+								</div>
+							</section>
+
+						<!-- About Us -->
+							<section id="two" class="wrapper alt spotlight style2">
+								<div class="inner">
+									<a href="about.html" class="image"><img src="images/about.jpg" alt="About Us" /></a>
+									<div class="content">
+										<h2 class="major">About Wisconsin Tech Solutions</h2>
+										<p>We are a team of dedicated professionals committed to delivering cutting-edge IT solutions to help businesses thrive.</p>
+										<a href="about.html" class="special">Learn more</a>
+									</div>
+								</div>
+							</section>
+
+						<!-- Contact -->
+							<section id="three" class="wrapper spotlight style3">
+								<div class="inner">
+									<a href="contact.html" class="image"><img src="images/contact.jpg" alt="Contact Us" /></a>
+									<div class="content">
+										<h2 class="major">Get in Touch</h2>
+										<p>Have questions or need assistance? Reach out to our team, and we'll be happy to help.</p>
+										<a href="contact.html" class="special">Contact us</a>
+									</div>
+								</div>
+							</section>
+
+					</section>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							</ul>
+							<p>&copy; Wisconsin Tech Solutions. All rights reserved.</p>
+						</div>
+					</footer>
+
+			</div>
+
+		<script src="assets/js/main.js"></script>
+
+	</body>
 </html>

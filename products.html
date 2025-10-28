@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Products - Wisconsin Tech Solutions</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    </head>
+    <body class="is-preload">
+        <div id="page-wrapper">
+            <header id="header">
+                <h1><a href="index.html">Wisconsin Tech Solutions</a></h1>
+                <nav>
+                    <a href="#menu">Menu</a>
+                </nav>
+            </header>
+            <nav id="menu">
+                <div class="inner">
+                    <h2>Menu</h2>
+                    <ul class="links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="#">Log In</a></li>
+                        <li><a href="#">Sign Up</a></li>
+                    </ul>
+                    <a href="#" class="close">Close</a>
+                </div>
+            </nav>
+            <section id="wrapper">
+                <header>
+                    <div class="inner">
+                        <h2>Our Products & Services</h2>
+                        <p>Choose from our range of professional IT solutions designed to help your business succeed.</p>
+                    </div>
+                </header>
+                <div class="wrapper">
+                    <div class="inner">
+                        <!-- Product 1 -->
+                        <section class="product-item">
+                            <h3>Basic Website Package</h3>
+                            <p>Professional 5-page website with responsive design, basic SEO, and 1 year hosting included.</p>
+                            <div class="product-price">$599</div>
+                            <button class="add-to-cart" data-product="basic-website" data-price="599">Add to Cart</button>
+                        </section>
+
+                        <!-- Product 2 -->
+                        <section class="product-item">
+                            <h3>Premium Website Package</h3>
+                            <p>Custom 10-page website with advanced features, e-commerce capability, SEO optimization, and 1 year hosting.</p>
+                            <div class="product-price">$1,299</div>
+                            <button class="add-to-cart" data-product="premium-website" data-price="1299">Add to Cart</button>
+                        </section>
+
+                        <!-- Product 3 -->
+                        <section class="product-item">
+                            <h3>IT Support Package</h3>
+                            <p>Monthly IT support including remote assistance, system monitoring, and priority technical support.</p>
+                            <div class="product-price">$99/month</div>
+                            <button class="add-to-cart" data-product="it-support" data-price="99">Add to Cart</button>
+                        </section>
+
+                        <!-- Product 4 -->
+                        <section class="product-item">
+                            <h3>Network Setup & Security</h3>
+                            <p>Complete network installation, security configuration, and firewall setup for small businesses.</p>
+                            <div class="product-price">$799</div>
+                            <button class="add-to-cart" data-product="network-setup" data-price="799">Add to Cart</button>
+                        </section>
+
+                        <!-- Cart Summary -->
+                        <section id="cart-summary" style="margin-top: 2rem; padding: 1rem; border: 1px solid #ccc;">
+                            <h3>Shopping Cart</h3>
+                            <div id="cart-items">
+                                <p>Your cart is empty</p>
+                            </div>
+                            <div id="cart-total">
+                                <strong>Total: $0</strong>
+                            </div>
+                            <button id="checkout-btn" style="display: none;">Proceed to Checkout</button>
+                        </section>
+                    </div>
+                </div>
+            </section>
+            <section id="footer">
+                <div class="inner">
+                    <h2 class="major">Get in touch</h2>
+                    <p>Questions about our products? Contact us for a free consultation.</p>
+                    <ul class="contact">
+                        <li class="icon solid fa-home">
+                            Wisconsin Tech Solutions<br />
+                            Chippewa Falls, WI 54729
+                        </li>
+                        <li class="icon solid fa-envelope"><a href="#">contact@wi-ts.com</a></li>
+                    </ul>
+                    <ul class="copyright">
+                        <li>&copy; Wisconsin Tech Solutions. All rights reserved.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        <script src="assets/js/jquery.min.js"></script>
+        <script>
+            let cart = [];
+            
+            document.addEventListener('DOMContentLoaded', function() {
+                const addToCartButtons = document.querySelectorAll('.add-to-cart');
+                
+                addToCartButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const product = this.getAttribute('data-product');
+                        const price = parseFloat(this.getAttribute('data-price'));
+                        const name = this.parentElement.querySelector('h3').textContent;
+                        
+                        addToCart(product, name, price);
+                    });
+                });
+            });
+            
+            function addToCart(id, name, price) {
+                const existingItem = cart.find(item => item.id === id);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id: id,
+                        name: name,
+                        price: price,
+                        quantity: 1
+                    });
+                }
+                
+                updateCartDisplay();
+            }
+            
+            function updateCartDisplay() {
+                const cartItems = document.getElementById('cart-items');
+                const cartTotal = document.getElementById('cart-total');
+                const checkoutBtn = document.getElementById('checkout-btn');
+                
+                if (cart.length === 0) {
+                    cartItems.innerHTML = '<p>Your cart is empty</p>';
+                    cartTotal.innerHTML = '<strong>Total: $0</strong>';
+                    checkoutBtn.style.display = 'none';
+                } else {
+                    let itemsHTML = '';
+                    let total = 0;
+                    
+                    cart.forEach(item => {
+                        itemsHTML += `<p>${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}</p>`;
+                        total += item.price * item.quantity;
+                    });
+                    
+                    cartItems.innerHTML = itemsHTML;
+                    cartTotal.innerHTML = `<strong>Total: $${total.toFixed(2)}</strong>`;
+                    checkoutBtn.style.display = 'inline-block';
+                }
+            }
+        </script>
+    </body>
+</html>

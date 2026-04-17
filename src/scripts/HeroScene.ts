@@ -17,10 +17,14 @@ export interface SceneHandle {
 
 interface Polyhedron {
   mesh: THREE.LineSegments;
-  basePosition: THREE.Vector3;
   rotationVelocity: THREE.Vector3;
-  orbitSeed: number;
+  fallSpeed: number;
+  driftSeed: number;
 }
+
+const SPAWN_HALF_HEIGHT = 8;
+const SPAWN_HALF_WIDTH = 9;
+const SPAWN_DEPTH = 6;
 
 function buildGeometry(sides: Sides, detail: number): THREE.BufferGeometry {
   const radius = 1;
@@ -100,14 +104,11 @@ export function initHeroScene(canvas: HTMLCanvasElement, initial: SceneControls)
     for (let i = 0; i < state.count; i++) {
       const mesh = new THREE.LineSegments(edgeGeometry, material);
 
-      const spread = 7;
-      const depth = 6;
-      const pos = new THREE.Vector3(
-        (rand() - 0.5) * spread * 2,
-        (rand() - 0.5) * spread,
-        (rand() - 0.5) * depth - 1
+      mesh.position.set(
+        (rand() - 0.5) * SPAWN_HALF_WIDTH * 2,
+        (rand() - 0.5) * SPAWN_HALF_HEIGHT * 2,
+        (rand() - 0.5) * SPAWN_DEPTH - 1
       );
-      mesh.position.copy(pos);
 
       const scale = 0.5 + rand() * 0.9;
       mesh.scale.setScalar(scale);
@@ -115,17 +116,25 @@ export function initHeroScene(canvas: HTMLCanvasElement, initial: SceneControls)
 
       polyhedra.push({
         mesh,
-        basePosition: pos.clone(),
         rotationVelocity: new THREE.Vector3(
           (rand() - 0.5) * 0.6,
           (rand() - 0.5) * 0.6,
           (rand() - 0.5) * 0.3
         ),
-        orbitSeed: rand() * Math.PI * 2,
+        fallSpeed: 0.4 + rand() * 0.9,
+        driftSeed: rand() * Math.PI * 2,
       });
       group.add(mesh);
     }
   }
+
+  function respawnAbove(p: Polyhedron, rand: () => number) {
+    p.mesh.position.x = (rand() - 0.5) * SPAWN_HALF_WIDTH * 2;
+    p.mesh.position.y = SPAWN_HALF_HEIGHT + rand() * 2;
+    p.mesh.position.z = (rand() - 0.5) * SPAWN_DEPTH - 1;
+  }
+
+  const recycleRand = seededRandom(0xc0ffee);
 
   function updateMaterial() {
     material.color.set(state.color);
@@ -171,8 +180,11 @@ export function initHeroScene(canvas: HTMLCanvasElement, initial: SceneControls)
       p.mesh.rotation.x += p.rotationVelocity.x * dt * spd;
       p.mesh.rotation.y += p.rotationVelocity.y * dt * spd;
       p.mesh.rotation.z += p.rotationVelocity.z * dt * spd;
-      const bob = Math.sin(elapsed * 0.4 + p.orbitSeed) * 0.25;
-      p.mesh.position.y = p.basePosition.y + bob;
+      p.mesh.position.y -= p.fallSpeed * dt * spd;
+      p.mesh.position.x += Math.sin(elapsed * 0.3 + p.driftSeed) * 0.002 * spd;
+      if (p.mesh.position.y < -SPAWN_HALF_HEIGHT - 1) {
+        respawnAbove(p, recycleRand);
+      }
     }
 
     renderer.render(scene, camera);

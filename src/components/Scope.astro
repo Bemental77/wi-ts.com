@@ -1,0 +1,60 @@
+---
+const facts = [
+  { label: 'Duration', value: '4–6 months', note: 'Kickoff to production' },
+  { label: 'Team', value: '2–3 engineers', note: 'ML, data, integration' },
+  { label: 'Investment', value: '$150K–$300K', note: 'Fixed scope, milestone-based' },
+  { label: 'ROI Target', value: '< 12 months', note: 'Positive ROI post-deploy' },
+];
+---
+
+<section id="scope" class="section">
+  <div class="shell">
+    <header class="reveal" style="max-width: 720px; margin-bottom: 3rem;">
+      <span class="eyebrow">Project Shape</span>
+      <h2>Fixed scope. Transparent budget. Owned outcomes.</h2>
+      <p class="lead">
+        Milestone-based delivery across model development, data pipeline, and integration &mdash; no open-ended retainers.
+      </p>
+    </header>
+    <div class="grid grid--4">
+      {
+        facts.map((f) => (
+          <div class="scope-stat reveal">
+            <span class="scope-stat__label">{f.label}</span>
+            <strong class="scope-stat__value">{f.value}</strong>
+            <span class="scope-stat__note">{f.note}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .scope-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border-strong);
+  }
+
+  .scope-stat__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .scope-stat__value {
+    font-size: clamp(1.5rem, 2vw + 1rem, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+  }
+
+  .scope-stat__note {
+    font-size: 0.875rem;
+    color: var(--fg-muted);
+  }
+</style>

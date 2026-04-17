@@ -1,0 +1,55 @@
+---
+const pillars = [
+  {
+    num: '01',
+    title: 'Custom ML Model Development',
+    body: 'Train, optimize, and deploy machine learning models that improve decision-making or automate complex tasks. We design architectures, prepare training data, and iterate systematically on performance.',
+    metrics: ['Accuracy, precision, recall, F1', 'Inference latency', 'Deployment success rate'],
+    example:
+      'A manufacturing client needed to predict equipment failures before they occurred. Our predictive maintenance model reached 92% accuracy, reducing unplanned downtime by 18%.',
+  },
+  {
+    num: '02',
+    title: 'Data Pipeline Architecture',
+    body: 'Design scalable systems that collect, prepare, and deliver data for AI model training and inference. Most of a model\'s performance lives in its pipeline — quality in, quality out.',
+    metrics: ['Data quality score', 'Pipeline uptime', 'Processing latency & throughput'],
+    example:
+      'A healthcare client had patient data scattered across five systems. We unified it into a single data lake, cutting query time from two hours to three minutes.',
+  },
+  {
+    num: '03',
+    title: 'AI System Integration',
+    body: 'Embed AI models into your existing software systems, ensuring seamless operation at scale. Production readiness is designed in from day one — not bolted on after the fact.',
+    metrics: ['Response time', 'Uptime / reliability', 'Cost per prediction', 'Drift detection'],
+    example:
+      'A retail client needed a recommendation engine for 10M daily users. We delivered inference under 100ms with 99.99% uptime.',
+  },
+];
+---
+
+<section id="pillars" class="section">
+  <div class="shell">
+    <header class="reveal" style="max-width: 720px; margin-bottom: 3rem;">
+      <span class="eyebrow">What We Do</span>
+      <h2>Three practices, built around measurable outcomes.</h2>
+      <p class="lead">
+        Every engagement starts with technical uncertainty and ends with production-grade systems you own.
+      </p>
+    </header>
+    <div class="grid grid--3">
+      {
+        pillars.map((p) => (
+          <article class="card reveal">
+            <span class="card__number">{p.num}</span>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+            <ul>
+              {p.metrics.map((m) => <li>{m}</li>)}
+            </ul>
+            <p><em>{p.example}</em></p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

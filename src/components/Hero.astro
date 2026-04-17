@@ -1,8 +1,6 @@
 ---
 ---
 <section class="hero">
-  <canvas id="hero-canvas" class="hero__canvas" aria-hidden="true"></canvas>
-
   <div class="hero__overlay"></div>
 
   <div class="shell hero__content">
@@ -94,12 +92,21 @@
 
     const toggle = form.querySelector('.hero__panel-toggle') as HTMLButtonElement;
     const body = form.querySelector('.hero__panel-body') as HTMLElement;
+    const chevron = toggle.querySelector('.hero__panel-chevron')!;
+
+    function setExpanded(next: boolean) {
+      toggle.setAttribute('aria-expanded', String(next));
+      body.style.display = next ? '' : 'none';
+      chevron.textContent = next ? '▾' : '▸';
+    }
+
     toggle.addEventListener('click', () => {
-      const expanded = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!expanded));
-      body.style.display = expanded ? 'none' : '';
-      toggle.querySelector('.hero__panel-chevron')!.textContent = expanded ? '▸' : '▾';
+      setExpanded(toggle.getAttribute('aria-expanded') !== 'true');
     });
+
+    if (window.matchMedia('(max-width: 640px)').matches) {
+      setExpanded(false);
+    }
   }
 </script>
 
@@ -112,14 +119,6 @@
     overflow: hidden;
     margin-top: -4rem;
     padding-top: 4rem;
-  }
-
-  .hero__canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
   }
 
   .hero__overlay {

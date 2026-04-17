@@ -30,6 +30,7 @@ html {
   -webkit-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
+  background: var(--bg);
 }
 
 html.lenis-active {
@@ -38,7 +39,7 @@ html.lenis-active {
 
 body {
   margin: 0;
-  background: var(--bg);
+  background: transparent;
   color: var(--fg);
   font-family: var(--font-sans);
   font-size: 16px;

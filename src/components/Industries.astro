@@ -1,0 +1,42 @@
+---
+const industries = [
+  {
+    title: 'Manufacturing',
+    body: 'Predictive maintenance, quality control, and supply-chain optimization.',
+  },
+  {
+    title: 'Healthcare',
+    body: 'Patient risk prediction, diagnostic support, and operational efficiency — with HIPAA and clinical-workflow fluency.',
+  },
+  {
+    title: 'Financial Services & Insurance',
+    body: 'Fraud detection, churn prevention, and pricing optimization under real regulatory constraints.',
+  },
+  {
+    title: 'Retail & Distribution',
+    body: 'Demand forecasting, inventory optimization, and personalization at scale.',
+  },
+];
+---
+
+<section id="industries" class="section section--alt">
+  <div class="shell">
+    <header class="reveal" style="max-width: 720px; margin-bottom: 3rem;">
+      <span class="eyebrow">Where We Work</span>
+      <h2>Deep roots in Midwest industries.</h2>
+      <p class="lead">
+        We specialize in Wisconsin and Midwest businesses with clear technical uncertainty and teams ready to iterate.
+      </p>
+    </header>
+    <div class="grid grid--4">
+      {
+        industries.map((i) => (
+          <article class="card reveal">
+            <h3>{i.title}</h3>
+            <p>{i.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

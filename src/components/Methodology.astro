@@ -1,0 +1,52 @@
+---
+const phases = [
+  {
+    num: '01',
+    title: 'Technical Uncertainty Analysis',
+    weeks: 'Weeks 1–2',
+    body: 'Define what we don\'t know: Is this architecture right? Can we hit target accuracy with the current data? Establish baselines from the existing process and set quantitative success metrics before writing a line of training code.',
+  },
+  {
+    num: '02',
+    title: 'Experiment Design & Iteration',
+    weeks: 'Weeks 3–16',
+    body: 'Test multiple architectures, feature combinations, and training approaches. Log every result systematically. Example outcome: "We tested CNN, LSTM, and hybrid architectures. Hybrid won with 94% accuracy versus 89% for the alternatives."',
+  },
+  {
+    num: '03',
+    title: 'Model Optimization & Validation',
+    weeks: 'Weeks 12–20',
+    body: 'Tune hyperparameters, cross-validate on holdout data, stress-test edge cases, and audit for fairness and bias. The model you ship is the one that survived contact with the real distribution.',
+  },
+  {
+    num: '04',
+    title: 'Integration & Production Handoff',
+    weeks: 'Weeks 18–24',
+    body: 'Deploy to your infrastructure, build monitoring dashboards, stand up retraining pipelines, and document for your team. You leave the engagement owning the system, not renting it.',
+  },
+];
+---
+
+<section id="methodology" class="section section--alt">
+  <div class="shell">
+    <header class="reveal" style="max-width: 720px; margin-bottom: 3rem;">
+      <span class="eyebrow">Methodology</span>
+      <h2>Systematic AI development through experimentation.</h2>
+      <p class="lead">
+        Every project runs through four phases. Each produces documented decisions and validated evidence &mdash;
+        the process of getting to production-quality AI is as valuable as the model itself.
+      </p>
+    </header>
+    <div class="grid grid--2">
+      {
+        phases.map((p) => (
+          <article class="card reveal">
+            <span class="card__number">{p.num} · {p.weeks}</span>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,239 @@
+---
+---
+<section class="hero">
+  <canvas id="hero-canvas" class="hero__canvas" aria-hidden="true"></canvas>
+
+  <div class="hero__overlay"></div>
+
+  <div class="shell hero__content">
+    <span class="eyebrow">Wisconsin · AI Implementation</span>
+    <h1>Custom AI Implementation for Wisconsin Businesses.</h1>
+    <p class="lead">
+      Build proprietary ML models that solve your technical challenges. Measurable outcomes in 4&ndash;6 months &mdash;
+      through systematic experimentation, not off-the-shelf tooling.
+    </p>
+    <div class="hero__actions">
+      <a href="/contact" class="button button--primary">Start a Project</a>
+      <a href="#pillars" class="button">See Our Practice</a>
+    </div>
+  </div>
+
+  <form class="hero__panel" id="hero-controls" aria-label="Scene controls">
+    <button type="button" class="hero__panel-toggle" aria-expanded="true" aria-controls="hero-panel-body">
+      Controls <span class="hero__panel-chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="hero__panel-body" id="hero-panel-body">
+      <label>
+        <span class="hero__label">Speed</span>
+        <input type="range" name="speed" min="0" max="2.5" step="0.05" value="1" />
+      </label>
+      <label>
+        <span class="hero__label">Count</span>
+        <input type="range" name="count" min="1" max="24" step="1" value="9" />
+      </label>
+      <label>
+        <span class="hero__label">Sides</span>
+        <select name="sides">
+          <option value="4">4 · Tetrahedron</option>
+          <option value="6">6 · Cube</option>
+          <option value="8" selected>8 · Octahedron</option>
+          <option value="12">12 · Dodecahedron</option>
+          <option value="20">20 · Icosahedron</option>
+        </select>
+      </label>
+      <label>
+        <span class="hero__label">Detail</span>
+        <input type="range" name="detail" min="0" max="4" step="1" value="0" />
+      </label>
+      <label>
+        <span class="hero__label">Color</span>
+        <input type="color" name="color" value="#7aa2f7" />
+      </label>
+    </div>
+  </form>
+</section>
+
+<script>
+  import { initHeroScene, type SceneControls, type Sides } from '../scripts/HeroScene';
+
+  const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement | null;
+  const form = document.getElementById('hero-controls') as HTMLFormElement | null;
+
+  if (canvas && form) {
+    const initial: SceneControls = {
+      speed: 1,
+      count: 9,
+      color: '#7aa2f7',
+      sides: 8,
+      detail: 0,
+    };
+
+    const handle = initHeroScene(canvas, initial);
+
+    form.addEventListener('input', (e) => {
+      const target = e.target as HTMLInputElement | HTMLSelectElement;
+      const { name, value } = target;
+      switch (name) {
+        case 'speed':
+          handle.update({ speed: parseFloat(value) });
+          break;
+        case 'count':
+          handle.update({ count: parseInt(value, 10) });
+          break;
+        case 'sides':
+          handle.update({ sides: parseInt(value, 10) as Sides });
+          break;
+        case 'detail':
+          handle.update({ detail: parseInt(value, 10) });
+          break;
+        case 'color':
+          handle.update({ color: value });
+          break;
+      }
+    });
+
+    const toggle = form.querySelector('.hero__panel-toggle') as HTMLButtonElement;
+    const body = form.querySelector('.hero__panel-body') as HTMLElement;
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      body.style.display = expanded ? 'none' : '';
+      toggle.querySelector('.hero__panel-chevron')!.textContent = expanded ? '▸' : '▾';
+    });
+  }
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: min(92vh, 900px);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    margin-top: -4rem;
+    padding-top: 4rem;
+  }
+
+  .hero__canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(10, 12, 18, 0) 0%, rgba(10, 12, 18, 0.85) 75%),
+      linear-gradient(180deg, rgba(10, 12, 18, 0.2) 0%, rgba(10, 12, 18, 0.65) 100%);
+    pointer-events: none;
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 2;
+    max-width: 760px;
+  }
+
+  .hero__content h1 {
+    margin-bottom: 0.4em;
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1.75rem;
+  }
+
+  .hero__panel {
+    position: absolute;
+    right: clamp(1rem, 3vw, 2rem);
+    bottom: clamp(1rem, 3vw, 2rem);
+    z-index: 3;
+    width: min(260px, 90vw);
+    padding: 0.75rem;
+    background: rgba(16, 19, 28, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.8rem;
+  }
+
+  .hero__panel-toggle {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: var(--fg-muted);
+    font: inherit;
+    padding: 0.25rem 0.4rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.7rem;
+  }
+
+  .hero__panel-toggle:hover { color: var(--fg); }
+
+  .hero__panel-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .hero__panel-body label {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .hero__label {
+    color: var(--fg-muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+  }
+
+  .hero__panel-body input[type='range'] {
+    width: 100%;
+    accent-color: var(--accent);
+  }
+
+  .hero__panel-body input[type='color'] {
+    width: 100%;
+    height: 24px;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .hero__panel-body select {
+    width: 100%;
+    padding: 0.25rem 0.4rem;
+    font: inherit;
+    font-size: 0.75rem;
+    color: var(--fg);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+
+  @media (max-width: 640px) {
+    .hero__panel {
+      width: calc(100% - 2rem);
+      right: 1rem;
+      bottom: 1rem;
+    }
+  }
+</style>

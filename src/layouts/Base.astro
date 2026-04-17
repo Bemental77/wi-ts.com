@@ -27,6 +27,8 @@ const {
     />
   </head>
   <body>
+    <canvas id="hero-canvas" class="bg-canvas" aria-hidden="true"></canvas>
+
     <header class="site-header">
       <div class="shell site-header__inner">
         <a href="/" class="site-header__brand">
@@ -61,6 +63,16 @@ const {
     </script>
 
     <style>
+      .bg-canvas {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        display: block;
+        z-index: -1;
+        pointer-events: none;
+      }
+
       .site-header {
         position: fixed;
         top: 0;

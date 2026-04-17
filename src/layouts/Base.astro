@@ -1,0 +1,155 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'Wisconsin-based AI implementation practice. Custom ML models, data pipelines, and integrated AI systems with measurable outcomes in 4–6 months.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a href="/" class="site-header__brand">
+          <span class="site-header__brand-mark" aria-hidden="true"></span>
+          Wisconsin Tech Solutions
+        </a>
+        <nav class="site-header__nav" aria-label="Primary">
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/products">Products</a>
+          <a href="/contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell site-footer__inner">
+        <p>&copy; {new Date().getFullYear()} Wisconsin Tech Solutions LLC.</p>
+        <p class="site-footer__muted">Built in Wisconsin.</p>
+      </div>
+    </footer>
+
+    <script>
+      import { initSmoothScroll } from '../scripts/smoothScroll';
+      import { initScrollReveal } from '../scripts/scrollReveal';
+      initSmoothScroll();
+      initScrollReveal();
+    </script>
+
+    <style>
+      .site-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        padding: 1.1rem 0;
+        background: rgba(10, 12, 18, 0.72);
+        backdrop-filter: saturate(180%) blur(12px);
+        -webkit-backdrop-filter: saturate(180%) blur(12px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .site-header__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+      }
+
+      .site-header__brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        color: var(--fg);
+        font-weight: 600;
+        font-size: 0.95rem;
+        letter-spacing: -0.01em;
+      }
+
+      .site-header__brand:hover {
+        color: var(--fg);
+      }
+
+      .site-header__brand-mark {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 0 2px rgba(122, 162, 247, 0.25);
+      }
+
+      .site-header__nav {
+        display: flex;
+        gap: clamp(1rem, 2.5vw, 2rem);
+        font-size: 0.9rem;
+      }
+
+      .site-header__nav a {
+        color: var(--fg-muted);
+        transition: color 160ms var(--ease);
+      }
+
+      .site-header__nav a:hover {
+        color: var(--fg);
+      }
+
+      main {
+        padding-top: 4rem;
+      }
+
+      .site-footer {
+        border-top: 1px solid var(--border);
+        padding: 2.5rem 0;
+        margin-top: 4rem;
+      }
+
+      .site-footer__inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .site-footer p {
+        margin: 0;
+        font-size: 0.875rem;
+        color: var(--fg-muted);
+      }
+
+      .site-footer__muted {
+        color: var(--fg-subtle) !important;
+      }
+
+      @media (max-width: 640px) {
+        .site-header__nav { gap: 1rem; }
+        .site-header__brand { font-size: 0.85rem; }
+      }
+    </style>
+  </body>
+</html>
